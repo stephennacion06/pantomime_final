@@ -1,3 +1,7 @@
+# EDIT HERE YOUR IP WEBCAM IP ADDRESS
+default_vid_path = "http://192.168.55.115:8080/video"
+# EDIT HERE YOUR IP WEBCAM IP ADDRESS
+
 # YOLOv5 🚀 by Ultralytics, GPL-3.0 license
 """
 Run inference on images, videos, directories, streams, etc.
@@ -51,7 +55,7 @@ from utils.torch_utils import select_device, time_sync
 from flask import Flask, render_template, Response
 import cv2
 app=Flask(__name__)
-default_vid_path = "http://192.168.55.107:8080/video"
+
 default_model_path = "runs/train/exp/weights/best.pt"
 
 
@@ -86,7 +90,7 @@ def run(
 ):
     print(source, "DEBUG SOURCE")
     print("RUNNING")
-    source = "http://192.168.55.107:8080/video"
+    source = default_vid_path
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
     is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))
@@ -278,4 +282,4 @@ def video_feed():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0",debug=True)
